@@ -4,7 +4,7 @@
 
 The Azure VMware Solution has Azure Metrics for the percentage usage of cluster CPU, memory, and storage resources. These metrics are incorporated into Azure Alerts with thresholds for high-water mark and low-water mark values to trigger a call to an Azure Automation PowerShell Runbook via a Webhook which triggers the auto-scale event within the Azure VMware Solution private cloud.
 
-![Diagram Description automatically generated](./media/image1.png)
+![](./media/image1.png)
 
 ## Operational Considerations
 
@@ -22,17 +22,17 @@ As cluster resources change, IT operations need to manually update the auto-scal
 
 Azure VMware Solution Standard Cluster high-water and low-water marks for auto-scale alerts.
 
-![Table Description automatically generated](./media/image4.png)
+![](./media/image4.png)
 
 Azure VMware Solution Stretched Cluster high-water and low-water marks for auto-scale alerts.
 
-![Graphical user interface, text, application Description automatically generated](./media/image5.png)
+![](./media/image5.png)
 
 Note: the percentages change as the number of nodes change.
 
-There should be a minimum of one or two node (standard/stretched cluster respectively) steady-state percentage gap between the scale out alert high-water mark and the scale in alert low water mark values to avoid auto-scale flapping.
+There should be a minimum one or two node (standard/stretched cluster respectively) steady-state percentage gap between the scale out alert high-water mark and the scale in alert low water mark values to avoid auto-scale flapping.
 
-![Chart Description automatically generated](./media/image6.png)
+![](./media/image6.png)
 
 For each cluster, the CPU, memory, and storage alert monitors should be stacked within the same alert rule. Multiple clusters should not be aggregated into the same alert rule, because the alert threshold for a second cluster will not be detected when the alert is fired for the initial cluster, it would have to wait until the alert was cleared before being fired again for the second cluster. There would also be an imbalance of alert threshold percentages when the aggregate clusters have different node counts.
 
