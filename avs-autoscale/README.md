@@ -228,4 +228,4 @@ Step 7: Troubleshooting Azure Automation PowerShell Runbook Jobs.
 
 ## Testing
 
-During testing, there may not be time to wait for the Alert to clear and be ready to fire again. If this occurs, delete the fired alert rule and recreate.
+During testing, there may not be time to wait for the Alert to resolve and be ready to fire again. If this occurs, delete the fired alert rule and recreate.
