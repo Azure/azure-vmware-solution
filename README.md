@@ -1,4 +1,6 @@
-# Project
+# Azure VMware Solution Repository
+
+The Azure VMware Solution product group has created this GitHub repository to share Azure service interoperability code that enhances the value of the Azure VMware Solution service to our customers. This code is peer reviewed and tested before being published. Each Azure service interoperability project contains a README.md file that details the steps you need to follow to build the Azure service and then interoperate with the Azure VMware Solution.
 
 ## Contributing
 
