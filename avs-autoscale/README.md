@@ -2,6 +2,8 @@
 
 ## Overview
 
+This Auto-Scale function allows a customer to scale their Azure VMware Solution automatically to cost effectively meet their performance goals.
+
 The Azure VMware Solution has Azure Metrics for the percentage usage of cluster CPU, memory, and storage resources. These metrics are incorporated into Azure Alerts with thresholds for high-water mark and low-water mark values to trigger a call to an Azure Automation PowerShell Runbook via a Webhook which triggers the auto-scale event within the Azure VMware Solution private cloud.
 
 ![](./media/image1.png)
