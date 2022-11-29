@@ -1,0 +1,204 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string"
+        },
+        "networkInterfaceName": {
+            "type": "string"
+        },
+        "subnetName": {
+            "type": "string"
+        },
+        "virtualNetworkId": {
+            "type": "string"
+        },
+        "virtualMachineName": {
+            "type": "string"
+        },
+        "virtualMachineComputerName": {
+            "type": "string"
+        },
+        "virtualMachineRG": {
+            "type": "string"
+        },
+        "osDiskType": {
+            "type": "string"
+        },
+        "osDiskDeleteOption": {
+            "type": "string"
+        },
+        "virtualMachineSize": {
+            "type": "string"
+        },
+        "nicDeleteOption": {
+            "type": "string"
+        },
+        "adminUsername": {
+            "type": "string"
+        },
+        "adminPassword": {
+            "type": "secureString"
+        },
+        "userData": {
+            "type": "string"
+        },
+        "privateCloudId": {
+            "type" : "string"
+        }
+    },
+    "variables": {
+        "vnetId": "[parameters('virtualNetworkId')]",
+        "vnetName": "[last(split(variables('vnetId'), '/'))]",
+        "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]"
+    },
+    "resources": [
+        {
+            "name": "[parameters('networkInterfaceName')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2021-03-01",
+            "location": "[parameters('location')]",
+            "dependsOn": [],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "subnet": {
+                                "id": "[variables('subnetRef')]"
+                            },
+                            "privateIPAllocationMethod": "Dynamic"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "[parameters('virtualMachineName')]",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2022-03-01",
+            "location": "[parameters('location')]",
+            "identity": {
+                    "type" :"SystemAssigned"
+            },
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "[parameters('virtualMachineSize')]"
+                },
+                "storageProfile": {
+                    "osDisk": {
+                        "createOption": "fromImage",
+                        "managedDisk": {
+                            "storageAccountType": "[parameters('osDiskType')]"
+                        },
+                        "deleteOption": "[parameters('osDiskDeleteOption')]"
+                    },
+                    "imageReference": {
+                        "publisher": "canonical",
+                        "offer": "0001-com-ubuntu-server-jammy",
+                        "sku": "22_04-lts-gen2",
+                        "version": "latest"
+                    }
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]",
+                            "properties": {
+                                "deleteOption": "[parameters('nicDeleteOption')]"
+                            }
+                        }
+                    ]
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachineComputerName')]",
+                    "adminUsername": "[parameters('adminUsername')]",
+                    "adminPassword": "[parameters('adminPassword')]",
+                    "linuxConfiguration": {
+                        "patchSettings": {
+                            "patchMode": "ImageDefault"
+                        }
+                    }
+                },
+                "userData": "[parameters('userData')]",
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                }
+            },
+            "resources": [
+                {
+                    "type": "Extensions",
+                    "apiVersion": "2019-03-01",
+                    "name": "config-app",
+                    "location": "[parameters('location')]",
+                    "dependsOn": [
+                        "[parameters('virtualMachineName')]"
+                    ],
+                    "properties": {
+                        "publisher": "Microsoft.Azure.Extensions",
+                        "type": "CustomScript",
+                        "typeHandlerVersion": "2.1",
+                        "autoUpgradeMinorVersion": true,
+                        "protectedSettings": {
+                            "commandToExecute": "git clone -b azure-monitor https://github.com/Azure/azure-vmware-solution /root/azure-vmware-solution && sudo /root/azure-vmware-solution/AVS-Azure-Monitor/Worker/install.sh"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-09-01",
+            "name": "assignRolesToPrivateCloud",
+            "dependsOn": [
+                "[parameters('virtualMachineName')]"
+            ],
+            "resourceGroup" : "[split(parameters('privateCloudId'), '/')[4]]",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                     "resources": [
+                        {
+                            "type": "Microsoft.Authorization/roleAssignments",
+                            "apiVersion": "2020-04-01-preview",
+                            "name": "[guid(parameters('privateCloudId'),'b24988ac-6180-42a0-ab88-20f7382dd24c')]",
+                            "properties": {
+                                //contributor
+                                "roleDefinitionId": "[concat(parameters('privateCloudId'), '/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c')]",
+                                "principalId": "[reference(parameters('virtualMachineName'), '2022-03-01', 'Full').identity.principalId]",
+                                "principalType": "ServicePrincipal"
+                            },
+                            "scope": "[parameters('privateCloudId')]"
+                        },
+                        {
+                            "type": "Microsoft.Authorization/roleAssignments",
+                            "apiVersion": "2020-04-01-preview",
+                            "name": "[guid(parameters('privateCloudId'),'3913510d-42f4-4e42-8a64-420c390055eb')]",
+                            "properties": {
+                                //metrics publisher
+                                "roleDefinitionId": "[concat(parameters('privateCloudId'), '/providers/Microsoft.Authorization/roleDefinitions/3913510d-42f4-4e42-8a64-420c390055eb')]",
+                                "principalId": "[reference(parameters('virtualMachineName'), '2022-03-01', 'Full').identity.principalId]",
+                                "principalType": "ServicePrincipal"
+                            },
+                            "scope": "[parameters('privateCloudId')]"
+                        }
+                     ]
+                }
+            }
+        }
+    ],
+    "outputs": {
+        "adminUsername": {
+            "type": "string",
+            "value": "[parameters('adminUsername')]"
+        }
+    }
+}
