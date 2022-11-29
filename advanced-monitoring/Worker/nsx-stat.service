@@ -1,0 +1,13 @@
+[Unit]
+Description=NSX-T Stats Service
+After=multi-user.target
+
+[Service]
+Environment=AVS_CLOUD_ID="##CLOUDID##"
+Type=simple
+Restart=always
+WorkingDirectory=##WORKINGDIR##
+ExecStart=##WORKINGDIR##/start.sh
+
+[Install]
+WantedBy=multi-user.target
