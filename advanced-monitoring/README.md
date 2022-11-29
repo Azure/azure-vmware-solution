@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Azure VMware Solution metrics available in the Azure portal contains standard metrics. By using the solution provided in this repository customers can extend the metrics collected to include more advanced vSphere metrics as well as NSX-T Data Center Edge and Tier-0 metrics. This solution deploys a virtual machine in Azure with a managed identity that has contributor and metrics publisher access to the private cloud object.  
+The Azure VMware Solution metrics available in the Azure portal contains standard metrics. By using the solution provided in this repository customers can extend the metrics collected to include more advanced vSphere metrics as well as NSX-T Data Center Edge and Tier-0 Gateway metrics. This solution deploys a virtual machine in Azure with a managed identity that has contributor and metrics publisher access to the private cloud object.  
 
 
 ![](./media/overview.PNG)
@@ -19,7 +19,7 @@ The solution will deploy an Ubunutu 22.04 virtual machine of size Standard_DS1_v
 
 ## Deployment
 
-### ARM Template with GUI
+### Option 1 - ARM Template with GUI
 
 The deployment of the solution can be done automatically via a custom template gui by following this link:
 
@@ -27,7 +27,7 @@ The deployment of the solution can be done automatically via a custom template g
 
 The ARM template for deployment is located [template.json](./Deployment/template.json)
 
-### Manually
+### Option 2 - Manual
 
 The solution can be deployed manually as well:
 - Create an Ubuntu 22.04 virtual machine connected to a vNet that has access to the private cloud
@@ -54,7 +54,7 @@ The solution can be deployed manually as well:
 
 ## Viewing Metrics
 
-The metrics will appear on the private cloud object under the metrics tab under the telegraf namespace.  The vSphere metrics will be listed as vsphere_* and the NSX-T metrics will appear under tnt## 
+The metrics will appear on the private cloud object under the metrics tab under the telegraf namespace.  The vSphere metrics will be listed as vsphere_* and the NSX-T Data Center metrics will appear under tnt## 
  - vSphere Metrics
    ![](./media/extended_metrics.png)
    These metrics are listed at [README.md](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/vsphere/METRICS.md)
