@@ -146,7 +146,7 @@
                         "typeHandlerVersion": "2.1",
                         "autoUpgradeMinorVersion": true,
                         "protectedSettings": {
-                            "commandToExecute": "git clone -b azure-monitor https://github.com/Azure/azure-vmware-solution /root/azure-vmware-solution && sudo /root/azure-vmware-solution/AVS-Azure-Monitor/Worker/install.sh"
+                            "commandToExecute": "git clone -b azure-monitor https://github.com/Azure/azure-vmware-solution /root/azure-vmware-solution && sudo /root/azure-vmware-solution/advanced-monitoring/Worker/install.sh"
                         }
                     }
                 }

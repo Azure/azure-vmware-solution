@@ -23,7 +23,7 @@ The solution will deploy an Ubunutu 22.04 virtual machine of size Standard_DS1_v
 
 The deployment of the solution can be done automatically via a custom template gui by following this link:
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-vmware-solution%2FAVS-Auzre-Monitor%2FDeployment%2Ftemplate.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-vmware-solution%2FAVS-Auzre-Monitor%2FDeployment%2FcreateUiDefinition.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-vmware-solution%2Fadvanced-monitoring%2FDeployment%2Ftemplate.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-vmware-solution%2Fadvanced-monitoring%2FDeployment%2FcreateUiDefinition.json)
 
 The ARM template for deployment is located [template.json](./Deployment/template.json)
 
