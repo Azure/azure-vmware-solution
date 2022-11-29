@@ -25,6 +25,35 @@ The deployment of the solution can be done automatically via a custom template g
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-vmware-solution%2Fmain%2Fadvanced-monitoring%2FDeployment%2Ftemplate.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-vmware-solution%2Fmain%2Fadvanced-monitoring%2FDeployment%2FcreateUiDefinition.json)
 
+Follow the deployment wizard
+ - Enter the deployment basic info
+
+   ![](./media/template_1.png)
+
+
+ - Select the private cloud
+
+
+   ![](./media/template_2.png)
+
+
+ - Select an existing vnet that has connectivity to the private cloud
+
+
+   ![](./media/template_3.png)  
+
+
+ - Enter the virtual machine details
+
+
+   ![](./media/template_4.png)
+
+
+ - Complete the deployment
+
+ 
+   ![](./media/template_5.png)
+
 The ARM template for deployment is located [template.json](./Deployment/template.json)
 
 ### Option 2 - Manual
