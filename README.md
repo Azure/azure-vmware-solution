@@ -6,5 +6,5 @@ Use the [Table of Contents](#table-of-contents) section below to jump to the REA
 
 ## Table of Contents
 
-* [Auto-Scale Function](https://github.com/Azure/azure-vmware-solution/blob/main/avs-autoscale)
+* [Auto-Scale Function](https://github.com/Azure/azure-vmware-solution/blob/main/avs-autoscale/)
 * [AVS Advanced Monitoring](https://github.com/Azure/azure-vmware-solution/blob/main/AVS-Azure-Monitor)
