@@ -84,7 +84,7 @@ Depending upon the customer perceived severity of an auto-scale event, the scale
 
 ![](./media/image14.png)
 
-4.  In the Edit PowerShell Runbook window, copy the [Scale-Out PowerShell Runbook code from the code repository](https://github.com/Azure/azure-vmware-solution/blob/avs-autoscale/avs-autoscale/code/autoscale-out-runbook.ps1) into the main code screen without modification. Then select Save and Publish.
+4.  In the Edit PowerShell Runbook window, copy the [Scale-Out PowerShell Runbook code from the code repository](https://github.com/Azure/azure-vmware-solution/blob/main/avs-autoscale/code/autoscale-out-runbook.ps1) into the main code screen without modification. Then select Save and Publish.
 
 ![](./media/image15.png)
 
@@ -112,7 +112,7 @@ Depending upon the customer perceived severity of an auto-scale event, the scale
 
 ![](./media/image20.png)
 
-11. Repeat tasks 1 to 10 for the [Scale-In PowerShell Runbook](https://github.com/Azure/azure-vmware-solution/blob/avs-autoscale/avs-autoscale/code/autoscale-in-runbook.ps1).
+11. Repeat tasks 1 to 10 for the [Scale-In PowerShell Runbook](https://github.com/Azure/azure-vmware-solution/blob/main/avs-autoscale/code/autoscale-in-runbook.ps1).
 
 ### Step 3: Add Azure VMware Solution (Az.VMware) PowerShell Module to the Azure Automation Account.
 
