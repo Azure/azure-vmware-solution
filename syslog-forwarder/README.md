@@ -1,6 +1,6 @@
 #Azure VMware Solution Syslog Forwarder**
 
-**Originally from here and modified to work with Azure VMware
+**Sourced from this GitHub repository and modified to work with Azure VMware
 Solution:** [miguelangelopereira/azuremonitor2syslog: Forward Azure
 monitor logs to syslog (via Event Hub)
 (github.com)](https://github.com/miguelangelopereira/azuremonitor2syslog)
