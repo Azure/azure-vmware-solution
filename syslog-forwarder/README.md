@@ -1,11 +1,11 @@
-#Azure VMware Solution Syslog Forwarder
+# Azure VMware Solution Syslog Forwarder
 
 **Sourced from this GitHub repository and modified to work with Azure VMware
 Solution:** [miguelangelopereira/azuremonitor2syslog: Forward Azure
 monitor logs to syslog (via Event Hub)
 (github.com)](https://github.com/miguelangelopereira/azuremonitor2syslog)
 
-##Overview
+## Overview
 
 Large enterprise and strategic customers have existing and established
 monitoring solutions that are a constraint for adopting new solutions
@@ -24,7 +24,7 @@ sent to an external Syslog server.
 
 ![](./media/image1.png)
 
-##Operational Considerations**
+## Operational Considerations**
 
 This Azure service configuration (Event Hub & Azure Function App) costs
 approximately US\$3/day for a single Azure VMware Solution private
@@ -33,12 +33,12 @@ cloud.
 The Azure Function App is deployed with Visual Studio Code. GitHub is
 possible as well but is not covered here.
 
-##How-to Guide**
+## How-to Guide**
 
 Prerequisites: Connect Syslog Server (Azure VM or on-premises) to Azure
 vNET and ExpressRoute Gateway, if needed.
 
-###Step 1: Create an Azure Event Hub Namespace within the same Azure
+### Step 1: Create an Azure Event Hub Namespace within the same Azure
 Subscription and Azure Region as the Azure VMware Solution private
 cloud.
 
@@ -69,7 +69,7 @@ cloud.
 
 ![](./media/image6.png)
 
-###Step 2: Create an Azure Event Hub within the Azure Event Hub Namespace
+### Step 2: Create an Azure Event Hub within the Azure Event Hub Namespace
 from Step 1.
 
 1.  Select the Add Event Hub icon.
@@ -97,7 +97,7 @@ from Step 1.
 
 ![](./media/image11.png)
 
-###Step 3: Create an Azure Function App within the same Azure Subscription
+### Step 3: Create an Azure Function App within the same Azure Subscription
 and Azure Region as the Azure VMware Solution private cloud.
 
 1.  In the Basics tab, select the Azure Subscription, Azure Resource
@@ -141,7 +141,7 @@ and Azure Region as the Azure VMware Solution private cloud.
 
 ![](./media/image19.png)
 
-###Step 4: Connect the Azure Function App to the Azure Virtual Network that
+### Step 4: Connect the Azure Function App to the Azure Virtual Network that
 has network connectivity to the Syslog server.
 
 1.  Select the VNet integration link from the Networking tab of the
@@ -159,7 +159,7 @@ has network connectivity to the Syslog server.
 
 ![](./media/image22.png)
 
-###Step 5: Configure Microsoft Visual Studio Code with the necessary
+### Step 5: Configure Microsoft Visual Studio Code with the necessary
 extensions to deploy code to the Azure Function App.
 
 1.  Open Visual Studio Code, select the Extensions object and make sure
@@ -180,7 +180,7 @@ extensions to deploy code to the Azure Function App.
 
 ![](./media/image23.png)
 
-###Step 6: Configure Azure Function App with syslog-forwarding code using
+### Step 6: Configure Azure Function App with syslog-forwarding code using
 Microsoft Visual Studio Code.
 
 1.  Copy the GitHub repository files to a folder on your Windows
@@ -299,7 +299,7 @@ Microsoft Visual Studio Code.
 
 18. Right click over the Azure Function App and select Restart.
 
-###Step 7: Configure Azure VMware Solution private cloud to forward syslog
+### Step 7: Configure Azure VMware Solution private cloud to forward syslog
 messages to Azure Event Hub.
 
 1.  In the Azure VMware Solution Diagnostic settings window, select the
@@ -320,9 +320,9 @@ messages to Azure Event Hub.
 
 ![](./media/image46.png)
 
-##Troubleshooting
+## Troubleshooting
 
-###Step 8: Troubleshooting Azure Function syslog message processing.
+### Step 8: Troubleshooting Azure Function syslog message processing.
 
 1.  From Visual Studio Code, select the Azure Function App built in Step
     3 and make sure the following items exist:
@@ -367,7 +367,7 @@ messages to Azure Event Hub.
 
 ![](./media/image52.png)
 
-##Testing
+## Testing
 
 From a CentOS Linux machine connected to the Azure Virtual Network,
 logger can be used to send a test message to the Syslog server: logger
