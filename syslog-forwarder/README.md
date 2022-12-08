@@ -24,7 +24,7 @@ sent to an external Syslog server.
 
 ![](./media/image1.png)
 
-## Operational Considerations**
+## Operational Considerations
 
 This Azure service configuration (Event Hub & Azure Function App) costs
 approximately US\$3/day for a single Azure VMware Solution private
@@ -33,7 +33,7 @@ cloud.
 The Azure Function App is deployed with Visual Studio Code. GitHub is
 possible as well but is not covered here.
 
-## How-to Guide**
+## How-to Guide
 
 Prerequisites: Connect Syslog Server (Azure VM or on-premises) to Azure
 vNET and ExpressRoute Gateway, if needed.
