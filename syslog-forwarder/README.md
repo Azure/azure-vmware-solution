@@ -1,4 +1,4 @@
-#Azure VMware Solution Syslog Forwarder**
+#Azure VMware Solution Syslog Forwarder
 
 **Sourced from this GitHub repository and modified to work with Azure VMware
 Solution:** [miguelangelopereira/azuremonitor2syslog: Forward Azure
