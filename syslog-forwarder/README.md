@@ -178,7 +178,16 @@ extensions to deploy code to the Azure Function App.
         management utility for Windows. Ironically written in Go.
         (github.com)](https://github.com/coreybutler/nvm-windows#installation--upgrades)
 
+    e.  After NVM for Windows is installed, open a new Terminal Window from Visual Studio Code
+        and run the following commands in sequence: "nvm on", "nvm install latest" & "nvm use 19.2.0".
+
 ![](./media/image23.png)
+
+![](./media/image54.png)
+
+![](./media/image55.png)
+
+![](./media/image56.png)
 
 ### Step 6: Configure Azure Function App with syslog-forwarding code using
 Microsoft Visual Studio Code.
@@ -333,7 +342,8 @@ messages to Azure Event Hub.
         Hub shared access key.
 
     c.  Files folder has EventHubTrigger function.json, index.js files
-        and node_modules has syslog-client folder.
+        and node_modules has syslog-client folder. Verify that the index.js
+        file has the syslog function code.
 
 ![](./media/image47.png)
 
