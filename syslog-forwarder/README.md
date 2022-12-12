@@ -295,7 +295,7 @@ Microsoft Visual Studio Code.
 
     f.  Name: \<eventhubname\>-RootManageSharedAccessKey_EVENTHUB (this
         needs to match the connection name in the function.json file in
-        the local folder), Value: \<Event Hub shared policy primary
+        the Azure Function App EventHubTrigger folder), Value: \<Event Hub shared policy primary
         access string from Step 1\>
 
 ![](./media/image40.png)
