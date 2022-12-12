@@ -4,6 +4,7 @@
 Solution:** [miguelangelopereira/azuremonitor2syslog: Forward Azure
 monitor logs to syslog (via Event Hub)
 (github.com)](https://github.com/miguelangelopereira/azuremonitor2syslog)
+which relies upon this [Syslog-Client](https://travis-ci.org/github/paulgrove/node-syslog-client)
 
 ## Overview
 
