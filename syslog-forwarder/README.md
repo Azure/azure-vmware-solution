@@ -21,7 +21,7 @@ to a customer Syslog server. This Syslog Forwarder function provides
 this capability by streaming Azure VMware Solution Diagnostic logs as a
 JSON.string to Azure Event Hub which is then in turn processed by an
 Azure Function App to convert the JSON.string into Syslog format and
-sent to an external Syslog server.
+send to an external Syslog server.
 
 ![](./media/image1.png)
 
