@@ -8,4 +8,4 @@ Use the [Table of Contents](#table-of-contents) section below to jump to the REA
 
 * [AVS Auto-Scale](https://github.com/Azure/azure-vmware-solution/blob/main/avs-autoscale/)
 * [AVS Advanced Monitoring](https://github.com/Azure/azure-vmware-solution/blob/main/advanced-monitoring/)
-* [AVS Syslog Forwarder](https://github.com/Azure/azure-vmware-solution/tree/syslog-forwarder/syslog-forwarder)
+* [AVS Syslog Forwarder](https://github.com/Azure/azure-vmware-solution/tree/main/syslog-forwarder)
