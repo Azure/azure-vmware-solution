@@ -193,7 +193,7 @@ extensions to deploy code to the Azure Function App.
 ### Step 6: Configure Azure Function App with syslog-forwarding code using
 Microsoft Visual Studio Code.
 
-1.  Copy the GitHub repository file (index.js) to a folder on your Windows
+1.  Copy the GitHub repository file ([index.js](https://github.com/Azure/azure-vmware-solution/blob/main/syslog-forwarder/code/index.js)) to a folder on your Windows
     desktop. The create project build will create the function.json file with 
     the Azure Event Hub connector variables.
 
