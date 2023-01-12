@@ -122,6 +122,8 @@ Depending upon the customer perceived severity of an auto-scale event, the scale
 
 2.  In the Add a Module screen, Browse from the Gallery for the Az.VMware PowerShell Module and select the 5.1 Runtime version. Select the Import button.
 
+Note: The Az.VMware module has a dependency on Az.Accounts. If Az.Accounts has not previously been added to an Azure Automation Account in your subscription, you will need to add that module first and allow a few minutes for the import to complete before adding the Az.VMware module.
+
 ![](./media/image22.png)
 
 ### Step 4: Add Runas Service Account to the Azure Automation Account.
