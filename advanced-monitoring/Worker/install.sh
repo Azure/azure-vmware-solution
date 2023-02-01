@@ -32,6 +32,9 @@ wget -qO- https://repos.influxdata.com/influxdb.key | tee /etc/apt/trusted.gpg.d
 source /etc/os-release && echo "deb https://repos.influxdata.com/${ID} ${VERSION_CODENAME} stable" | tee /etc/apt/sources.list.d/influxdb.list
 apt-get update
 apt-get install python3-pip python3-venv telegraf -y
+#install 1.25 via dpkg because 1.21 has a bug that causes the telegraf service to fail
+wget https://dl.influxdata.com/telegraf/releases/telegraf_1.25.0-1_amd64.deb
+dpkg -i telegraf_1.25.0-1_amd64.deb
 service telegraf stop
 systemctl disable telegraf.service
 mkdir $install_path
