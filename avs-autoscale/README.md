@@ -8,6 +8,8 @@ The Azure VMware Solution has Azure Metrics for the percentage usage of cluster 
 
 ![](./media/image1.png)
 
+This solution has been peer reviewed but is best-effort and should be assessed and tested by the customer before using in an Azure VMware Solution production environment.
+
 ## Operational Considerations
 
 When Alert Rules are defined within the Azure VMware Solution, they are fired when the defined threshold is met, and the auto-scale PowerShell Runbook is executed. Once the auto-scale event has completed, the Alert condition will resolve once the Alert threshold is no longer breached and the Alert Rule will be ready to be fired again.
