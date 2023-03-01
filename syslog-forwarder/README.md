@@ -25,6 +25,8 @@ send to an external Syslog server.
 
 ![](./media/image1.png)
 
+This solution has been peer reviewed but is best-effort and should be assessed and tested by the customer before using in an Azure VMware Solution production environment.
+
 ## Operational Considerations
 
 This Azure service configuration (Event Hub & Azure Function App) costs
