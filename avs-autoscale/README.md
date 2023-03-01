@@ -1,4 +1,4 @@
-# Azure VMware Solution Auto-Scale with Azure Automation
+# Azure VMware Solution Auto-Scale
 
 ## Overview
 
