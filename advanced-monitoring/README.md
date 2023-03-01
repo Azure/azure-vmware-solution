@@ -6,6 +6,8 @@ The Azure VMware Solution metrics available in the Azure portal contains standar
 
 ![](./media/overview.PNG)
 
+This solution has been peer reviewed but is best-effort and should be assessed and tested by the customer before using in an Azure VMware Solution production environment.
+
 ## Considerations
 
 ### Deployment 
