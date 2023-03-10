@@ -65,7 +65,7 @@ The solution can be deployed manually as well:
 
 - Install the software on the virtual machine
   - `git clone https://github.com/Azure/azure-vmware-solution`
-  - `cd azure-vmware-solution/AVS-Azure-Monitor`
+  - `cd azure-vmware-solution/advanced-monitoring/Worker/`
   - `./install.sh`
 - Check status
   - `systemctl status nsx-stat`
