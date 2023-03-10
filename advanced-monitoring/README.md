@@ -12,7 +12,7 @@ This solution has been peer reviewed but is best-effort and should be assessed a
 
 ### Deployment 
 
-The solution deployment requires that you select an existing vNet with network access to the vCenter Server and NSX-T Manager of an existing Azure VMware Solution Private Cloud.  A new vNet cannot be created during the deployment of this solution because the new vNet would not have a connection to the private cloud.  The default virtual machine sized deployed is Standard_DS1_v2, this virtual machine can be scaled if additional resources are required due to increased monitoring load.   There is a 1:1 relationship between monitoring virtual machines and a private cloud.
+The solution deployment requires that you select an existing vNet with network access to the vCenter Server and NSX-T Manager of an existing Azure VMware Solution Private Cloud.  A new vNet cannot be created during the deployment of this solution because the new vNet would not have a connection to the private cloud.  The default virtual machine sized deployed is Standard_DS1_v2, this virtual machine can be scaled if additional resources are required due to increased monitoring load.   There is a 1:1 relationship between monitoring virtual machines and a private cloud.  The virtual machine will need access to the internet to install the required Ubunut packages,  github to download additional packages, and the azure monitoring public endpoints.
 
 ### Cost
 
