@@ -75,7 +75,7 @@ The solution can be deployed manually as well:
 
 ## Viewing Metrics
 
-The metrics will appear on the private cloud object under the metrics tab under the telegraf namespace.  The vSphere metrics will be listed as vsphere_* and the NSX-T Data Center metrics will appear under tnt## 
+The metrics will appear on the private cloud object under the metrics tab under the telegraf namespace. The vSphere metrics will be listed as vsphere_* and the NSX-T Data Center metrics will appear under tnt##:
  - vSphere Metrics
  
    ![](./media/extended_metrics.png)
@@ -86,7 +86,7 @@ The metrics will appear on the private cloud object under the metrics tab under 
 
 ![](./media/nsx_base_metrics.PNG)
 
-Splitting may be applied to some metrics to gain more detailed insight
+Splitting may be applied to some metrics to gain more detailed insight:
  - Per VM CPU usage
 
 ![](./media/pervm_cpu_usage.png)
@@ -96,6 +96,6 @@ NSX-T Data Center Edge VM metrics are under the EVM## metric.
 
 ![](./media/evm_pervm_cpu_usage.png)
 
- - Edge Tier-0 Interfaces are tied to specific edge VMs.  The interfaces are listed in metrics under T0-Priv0#.  Each edge VM has two interfaces Priv01 and Priv03 are attached to EMV01.  Interface Priv02 and Priv04 are attached to EVM02.  
+ - Edge Tier-0 Interfaces are tied to specific edge VMs. The interfaces are listed in metrics under T0-Priv0#. Each edge VM has two interfaces Priv01 and Priv03 are attached to EVM01. Interface Priv02 and Priv04 are attached to EVM02.  
 
 ![](./media/nsx_t0_priv01_bytes.PNG)
