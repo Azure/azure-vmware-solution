@@ -12,11 +12,11 @@ This solution has been peer reviewed but is best-effort and should be assessed a
 
 ### Deployment 
 
-The solution deployment requires that you select an existing vNet with network access to the vCenter Server and NSX-T Manager of an existing Azure VMware Solution Private Cloud.  A new vNet cannot be created during the deployment of this solution because the new vNet would not have a connection to the private cloud.  The default virtual machine sized deployed is Standard_DS1_v2, this virtual machine can be scaled if additional resources are required due to increased monitoring load.   There is a 1:1 relationship between monitoring virtual machines and a private cloud.  The virtual machine will need access to the internet to install the required Ubunut packages,  github to download additional packages, and the azure monitoring public endpoints.
+The solution deployment requires that you select an existing vNet with network access to the vCenter Server and NSX-T Manager of an existing Azure VMware Solution Private Cloud. A new vNet cannot be created during the deployment of this solution because the new vNet would not have a connection to the private cloud. The default virtual machine sized deployed is Standard_DS1_v2, this virtual machine can be scaled if additional resources are required due to increased monitoring load. There is a 1:1 relationship between monitoring virtual machines and a private cloud. The virtual machine will need access to the internet to install the required Ubuntu packages,  GitHub to download additional packages, and the Azure monitoring public endpoints.
 
 ### Cost
 
-The solution will deploy an Ubunutu 22.04 virtual machine of size Standard_DS1_v2.  This is an additional cost that the customer subscription will be billed for. This virtual machine will also consume network traffic for both collection metrics as well as publishing metrics. The amount of traffic will vary based on the size of the private cloud as well as number of objects deployed in the private cloud.  Custom metrics also incur a cost.  The costs associated with Azure Monitor are available here [Azure Monitor](https://azure.microsoft.com/en-us/pricing/details/monitor/).
+The solution will deploy an Ubunutu 22.04 virtual machine of size Standard_DS1_v2. This is an additional cost that the customer subscription will be billed for. This virtual machine will also consume network traffic for both collection metrics as well as publishing metrics. The amount of traffic will vary based on the size of the private cloud as well as number of objects deployed in the private cloud.  Custom metrics also incur a cost. The costs associated with Azure Monitor are available here [Azure Monitor](https://azure.microsoft.com/en-us/pricing/details/monitor/).
 
 ## Deployment
 
@@ -72,7 +72,6 @@ The solution can be deployed manually as well:
   - `systemctl status telegraf`
 
     The services should be running
-
 
 ## Viewing Metrics
 
