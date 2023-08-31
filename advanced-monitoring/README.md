@@ -52,7 +52,11 @@ The ARM template for deployment is located here: [template.json](./Deployment/te
 ### Option 2 - Manual
 
 The solution can be deployed manually as well:
-- Create an Ubuntu 22.04 virtual machine connected to a vNet that has access to the private cloud
+
+There are two installation scripts for Ubuntu and RHEL-based distributionns.
+
+- For Ubuntu create an Ubuntu 22.04 virtual machine connected to a vNet that has access to the private cloud.
+- For RHEL-based distributions create a Red Hat Enterprise Linux 9 or a Rocky Linux 9 vritual machine, conencted to a vNet with access to the private cloud.
 - Configure an identity on the virtual machine either System or User managed
    ![](./media/assign_identity.png)
 
@@ -63,10 +67,15 @@ The solution can be deployed manually as well:
   The format of the resource ID is `/subscriptions/<SUBSCRIPTIONID>/resourceGroups/<RESOURCEGROUPNAME>/providers/Microsoft.AVS/privateClouds/<PRIVATECLOUDNAME>`
    ![](./media/assign_userdata.png)
 
-- Install the software on the virtual machine
-  - `git clone https://github.com/Azure/azure-vmware-solution`
-  - `cd azure-vmware-solution/advanced-monitoring/Worker/`
-  - `./install.sh`
+- Install the software on the virtual machine. The installation scripts must be executed as `root` user or with `sudo`.
+  - Ubuntu:
+    - `git clone https://github.com/Azure/azure-vmware-solution`
+    - `cd azure-vmware-solution/advanced-monitoring/Worker/`
+    - `./install.sh`
+  - RHEL:
+    - `git clone https://github.com/Azure/azure-vmware-solution`
+    - `cd azure-vmware-solution/advanced-monitoring/Worker/`
+    - `./install_rhel.sh`
 - Check status
   - `systemctl status nsx-stat`
   - `systemctl status telegraf`
