@@ -1,5 +1,7 @@
 # Azure VMware Solution Syslog Forwarder
 
+**This solution has been replaced by [Send VMware syslogs to log management server using Azure Logic Apps](https://learn.microsoft.com/en-us/azure/azure-vmware/logs-via-logic-app).**
+
 **Sourced from this GitHub repository and modified to work with Azure VMware
 Solution:** [miguelangelopereira/azuremonitor2syslog: Forward Azure
 monitor logs to syslog (via Event Hub)
