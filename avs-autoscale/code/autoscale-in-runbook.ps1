@@ -9,6 +9,10 @@ param (
 )
 $ErrorActionPreference = "stop"
 
+# Minimum number of nodes in allowed to scale up to in the cluster
+# This is set to 5 for the purpose of this example. The minimum number of nodes in a cluster is 3.
+$minnodes = 5
+
 # Array of datastore names in storage alert used to map to clustername
 $vsandatastorename = 'vsanDatastore (1)','vsanDatastore (2)','vsanDatastore (3)','vsanDatastore (4)','vsanDatastore (5)','vsanDatastore (6)','vsanDatastore (7)','vsanDatastore (8)','vsanDatastore (9)','vsanDatastore (10)','vsanDatastore (11)'
 
@@ -54,16 +58,10 @@ if ($WebhookData) {
       Write-Verbose "*** This is an AVS Private Cloud." -Verbose
 
       # Authenticate to Azure with service principal and certificate and set subscription
-      Write-Verbose "*** Authenticating to Azure with service principal and certificate" -Verbose
-      $ConnectionAssetName = "AzureRunAsConnection"
-      Write-Verbose "*** Get connection asset: $ConnectionAssetName" -Verbose
-      $Conn = Get-AutomationConnection -Name $ConnectionAssetName
-      if ($Conn -eq $null) {
-        throw "Could not retrieve connection asset: $ConnectionAssetName. Check that this asset exists in the Automation account."
-      }
-      Write-Verbose "*** Authenticating to Azure with service principal." -Verbose
-      Add-AzAccount -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint | Write-Verbose
-      Write-Verbose "*** Setting subscription to work against: $SubId" -Verbose
+      Write-Verbose "*** Authenticating to Azure" -Verbose
+      Connect-AzAccount -Identity -ErrorAction Stop
+      Write-Verbose "Authentication successful."
+      Write-Verbose "Setting subscription context to $SubId"
       Set-AzContext -SubscriptionId $SubId -ErrorAction Stop | Write-Verbose
 
       # Part 1 - Detect if Cluster Type is the Management Cluster (Cluster-1) or a Resource cluster (Cluster-2 -> Cluster-12)
@@ -118,6 +116,14 @@ if ($WebhookData) {
         if ($ClusterTypeManagement -eq $true) {
           # Management Cluster Size Calculation & Execution
           $MgmtClusterCurrentSize = $MgmtCluster.ManagementClusterSize
+
+          # Check if the current size is less than or equal to the minimum nodes allowed
+          # If so, exit the script and do not attempt to scale in the cluster
+          if ($MgmtClusterCurrentSize -le $minnodes) {
+            Write-Verbose "*** Management Cluster already at or below min size $minnodes. No action taken." -Verbose
+            return
+          }
+
           if ($MgmtClusterAvailabilityType -eq "DualZone") {
             # DualZone requires 1 node per Availability Zone = 2
             $MgmtClusterNewSize = $MgmtClusterCurrentSize - 2
@@ -140,6 +146,13 @@ if ($WebhookData) {
           # Resource Cluster Size Calculation & Execution
           $ResourceCluster = Get-AzVMwareCluster -SubscriptionId $SubId -ResourceGroupName $ResourceGroupName -PrivateCloudName $ResourceName -Name $ClusterName
           $ResourceClusterCurrentSize = $ResourceCluster.Size
+
+          # Check if the current size is less than or equal to the minimum nodes allowed
+          # If so, exit the script and do not attempt to scale in the cluster
+          if ($ResourceClusterCurrentSize -le $minnodes) {
+            Write-Verbose "*** Resource Cluster already at or below min size $minnodes. No action taken." -Verbose
+            return
+          }
 
           if ($MgmtClusterAvailabilityType -eq "DualZone") {
             # DualZone requires 1 node per Availability Zone = 2
