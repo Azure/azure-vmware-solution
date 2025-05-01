@@ -9,6 +9,10 @@ param (
 )
 $ErrorActionPreference = "stop"
 
+# Maximum number of nodes in allowed to scale up to in the cluster
+# This is set to 5 for the purpose of this example. The maximum number of nodes in a cluster is 16.
+$maxnodes = 5
+
 # Array of datastore names in storage alert used to map to clustername
 $vsandatastorename = 'vsanDatastore (1)','vsanDatastore (2)','vsanDatastore (3)','vsanDatastore (4)','vsanDatastore (5)','vsanDatastore (6)','vsanDatastore (7)','vsanDatastore (8)','vsanDatastore (9)','vsanDatastore (10)','vsanDatastore (11)'
 
@@ -33,6 +37,7 @@ if ($WebhookData) {
     $alertContext = [object] ($WebhookBody.data).alertContext
     $alertContextdimensionsName = $alertContext.condition.allOf[0].dimensions[0].name
     $alertContextdimensionsValue = $alertContext.condition.allOf[0].dimensions[0].value
+    Write-Verbose "*** alertContext: $alertContext" -Verbose
     Write-Verbose "*** alertContextdimensionsName: $alertContextdimensionsName" -Verbose
     Write-Verbose "*** alertContextdimensionsValue: $alertContextdimensionsValue" -Verbose
   }
@@ -53,19 +58,14 @@ if ($WebhookData) {
       # This is an AVS Private Cloud
       Write-Verbose "*** This is an AVS Private Cloud." -Verbose
 
-      # Authenticate to Azure with service principal and certificate and set subscription
-      Write-Verbose "*** Authenticating to Azure with service principal and certificate" -Verbose
-      $ConnectionAssetName = "AzureRunAsConnection"
-      Write-Verbose "*** Get connection asset: $ConnectionAssetName" -Verbose
-      $Conn = Get-AutomationConnection -Name $ConnectionAssetName
-      if ($Conn -eq $null) {
-        throw "Could not retrieve connection asset: $ConnectionAssetName. Check that this asset exists in the Automation account."
-      }
-      Write-Verbose "*** Authenticating to Azure with service principal." -Verbose
-      Add-AzAccount -ServicePrincipal -Tenant $Conn.TenantID -ApplicationId $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint | Write-Verbose
-      Write-Verbose "*** Setting subscription to work against: $SubId" -Verbose
+      # Authenticate to Azure with Manged identity
+      Write-Verbose "*** Authenticating to Azure" -Verbose
+      Connect-AzAccount -Identity -ErrorAction Stop
+      Write-Verbose "Authentication successful."
+      Write-Verbose "Setting subscription context to $SubId"
       Set-AzContext -SubscriptionId $SubId -ErrorAction Stop | Write-Verbose
 
+      
       # Part 1 - Detect if Cluster Type is the Management Cluster (Cluster-1) or a Resource cluster (Cluster-2 -> Cluster-12)
       # Part 2 - Detect if the alert type is storage, cpu or ram and map to correct cluster name
       # This is necessary because the AVS management and resource clusters use different PowerShell commands (Get-AzVMwarePrivateCloud, Update-AzVMwarePrivateCloud, Get-AzVMwareCluster, Update-AzVMwareCluster)
@@ -118,6 +118,13 @@ if ($WebhookData) {
         if ($ClusterTypeManagement -eq $true) {
           # Management Cluster Size Calculation & Execution
           $MgmtClusterCurrentSize = $MgmtCluster.ManagementClusterSize
+
+          if ($MgmtClusterCurrentSize -ge $maxnodes) {
+            # Management Cluster is already at maximum size, exit
+            Write-Verbose "*** Management Cluster is already at maximum size of $maxnodes nodes. No action taken." -Verbose
+            return
+          }
+
           if ($MgmtClusterAvailabilityType -eq "DualZone") {
             # DualZone requires 1 node per Availability Zone = 2
             $MgmtClusterNewSize = $MgmtClusterCurrentSize + 2
@@ -140,6 +147,12 @@ if ($WebhookData) {
           # Resource Cluster Size Calculation & Execution
           $ResourceCluster = Get-AzVMwareCluster -SubscriptionId $SubId -ResourceGroupName $ResourceGroupName -PrivateCloudName $ResourceName -Name $ClusterName
           $ResourceClusterCurrentSize = $ResourceCluster.Size
+          
+          if ($ResourceClusterCurrentSize -ge $maxnodes) {
+            # Resource Cluster is already at maximum size, exit
+            Write-Verbose "*** Resource Cluster is already at maximum size of $maxnodes nodes. No action taken." -Verbose
+            return
+          }
 
           if ($MgmtClusterAvailabilityType -eq "DualZone") {
             # DualZone requires 1 node per Availability Zone = 2
