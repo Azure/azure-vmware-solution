@@ -1,0 +1,22 @@
+# Register each database the agent may query (read-only).
+# Store each password as a Key Vault secret and reference it here by secret name.
+# The MCP server picks the driver from `type`: mssql | postgresql | mysql | oracle.
+#
+# REPLACE the hosts below with YOUR database VMs on the AVS workload segment.
+# The two-source example is deliberate: it shows the agent corroborating facts across
+# databases that were never joined together.
+
+sources:
+  sales:
+    type: mssql
+    description: "Orders, customers, and product sales."
+    connection: { host: 192.168.x.x, port: 1433, database: SalesDB }
+    auth: { kind: sql, username: agentreader, secret: sql-agentreader-password }
+    governance: { allow_schemas: [dbo], max_rows: 200 }
+
+  inventory:
+    type: mssql
+    description: "Stock levels, reorder points, and warehouse locations."
+    connection: { host: 192.168.x.x, port: 1433, database: InventoryDB }
+    auth: { kind: sql, username: agentreader, secret: sql-agentreader-password }
+    governance: { allow_schemas: [dbo], max_rows: 200 }
