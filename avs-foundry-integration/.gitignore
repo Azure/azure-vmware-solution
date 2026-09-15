@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Environment / secrets
+.env
+*.env
+*.secret
+
+# Logs / OS
+*.log
+.DS_Store
+Thumbs.db
+
+# Note: infra/main.json is committed intentionally (ARM JSON for JSON-only workflows).

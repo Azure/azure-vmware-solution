@@ -10,3 +10,4 @@ Use the [Table of Contents](#table-of-contents) section below to jump to the REA
 * [Azure VMware Solution Advanced Monitoring](https://github.com/Azure/azure-vmware-solution/blob/main/advanced-monitoring/)
 * [Azure VMware Solution Syslog Forwarder](https://github.com/Azure/azure-vmware-solution/tree/main/syslog-forwarder)
 * [Azure VMware Solution Master Diagrams](https://github.com/Azure/azure-vmware-solution/tree/main/azure-vmware-master-diagrams)
+* [Azure VMware Solution AI Data Agent](https://github.com/Azure/azure-vmware-solution/tree/main/avs-foundry-integration)
